@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                timeout(time: 8, unit: 'MINUTES'){
+                timeout(time: 12, unit: 'MINUTES'){
                     sh "mvn -DskipTests clean package -f SysAlmacen/pom.xml"
                 }
             }
