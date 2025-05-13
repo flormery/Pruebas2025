@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Sonar') {
             steps {
-                timeout(time: 4, unit: 'MINUTES'){
+                timeout(time: 12, unit: 'MINUTES'){
                     withSonarQubeEnv('sonarqube'){
                         sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar -Pcoverage -f SysAlmacen/pom.xml"
                     }
@@ -43,14 +43,14 @@ pipeline {
 
                 sleep(10) //seconds
 
-                timeout(time: 4, unit: 'MINUTES'){
+                timeout(time: 12, unit: 'MINUTES'){
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
         stage('Deploy') {
             steps {
-			    timeout(time: 8, unit: 'MINUTES'){
+			    timeout(time: 12, unit: 'MINUTES'){
 					// Ejecutar mvn spring-boot:run
 					echo "mvn spring-boot:run -f SysAlmacen/pom.xml"
                 }			
